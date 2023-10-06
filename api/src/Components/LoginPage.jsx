@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function LoginPage() {
+function LoginPage({ handlePage }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -28,7 +28,7 @@ function LoginPage() {
       console.log(token);
 
       localStorage.setItem("token", token);
-    } catch(e) {
+    } catch (e) {
       alert("유저의 정보가 없습니다.", e);
     }
   };
@@ -65,6 +65,9 @@ function LoginPage() {
             onChange={inputPassword}
           />
           <button>로그인</button>
+          <button type="button" onClick={handlePage}>
+            회원 가입
+          </button>
         </form>
       </section>
     </>

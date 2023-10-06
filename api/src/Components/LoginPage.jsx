@@ -14,20 +14,23 @@ function LoginPage() {
         password: password,
       },
     };
+    try {
+      const token = await fetch(baseUrl + reqPath, {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(loginData),
+      })
+        .then((res) => res.json())
+        .then((data) => data.user.token)
+        .catch(console.error("유저의 Token 정보가 없습니다."));
+      console.log(token);
 
-    const token = await fetch(baseUrl + reqPath, {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify(loginData),
-    })
-      .then((res) => res.json())
-      .then((data) => data.user.token)
-      .catch((error) => console.log(error));
-    console.log(token);
-
-    localStorage.setItem("token", token);
+      localStorage.setItem("token", token);
+    } catch(e) {
+      alert("유저의 정보가 없습니다.", e);
+    }
   };
 
   const inputEmail = (e) => {

@@ -29,7 +29,7 @@ const JoinPage = ({handlePage}) => {
         password: password,
         accountname: accountname,
         intro: info,
-        imgSrc: imgSrc,
+        image: imgSrc,
       },
     };
     join(joinData);
@@ -57,14 +57,15 @@ const JoinPage = ({handlePage}) => {
 
   const join = async (joinData) => {
     console.log(joinData);
-    const reqUrl = "https://api.mandarin.weniv.co.kr/user";
-    fetch(reqUrl, {
+    const reqUrl = "https://api.mandarin.weniv.co.kr/user/";
+    const data = await fetch(reqUrl, {
       method: "POST",
       headers: {
         "Content-type": "application/json",
       },
       body: JSON.stringify(joinData),
     }).then((res) => res.json());
+    console.log(data)
   };
 
   return (
